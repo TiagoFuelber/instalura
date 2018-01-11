@@ -18,3 +18,6 @@ class App extends Component {
 }
 
 export default App;
+
+// API no Heroku
+// https://instalura-api.herokuapp.com
