@@ -3,43 +3,43 @@ import {browserHistory} from  'react-router';
 
 export default class Login extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);        
         this.state = {msg: this.props.location.query.msg};
     }
 
-    envia(event){
+    envia(event) {
         event.preventDefault();
 
         const requestInfo = {
-            method:'POST',
-            body:JSON.stringify({
+            method: 'POST',
+            body: JSON.stringify({
                 login: this.login.value, 
                 senha: this.senha.value
             }),
-            headers:new Headers({
-                'Content-type' : 'application/json' 
+            headers: new Headers({
+                'Content-type': 'application/json' 
             })
         };
 
         fetch('https://instalura-api.herokuapp.com/api/public/login', requestInfo)
             .then(response => {
-                if(response.ok) {
+                if (response.ok) {
                     return response.text();
                 } else {
                     throw new Error('não foi possível fazer o login');
                 }
             })
             .then(token => {
-                localStorage.setItem('auth-token',token);
+                localStorage.setItem('auth-token', token);
                 browserHistory.push('/timeline');
             })
             .catch(error => {
-                this.setState({msg:error.message});
+                this.setState({msg: error.message});
             });
     }
 
-    render(){
+    render() {
         return (
             <div className="login-box">
                 <h1 className="header-logo">Instalura</h1>
