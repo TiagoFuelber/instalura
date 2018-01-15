@@ -5,7 +5,7 @@ export default class Login extends Component {
 
     constructor(props){
         super(props);        
-        this.state = {msg:this.props.location.query.msg};
+        this.state = {msg: this.props.location.query.msg};
     }
 
     envia(event){
@@ -13,13 +13,16 @@ export default class Login extends Component {
 
         const requestInfo = {
             method:'POST',
-            body:JSON.stringify({login:this.login.value,senha:this.senha.value}),
+            body:JSON.stringify({
+                login: this.login.value, 
+                senha: this.senha.value
+            }),
             headers:new Headers({
                 'Content-type' : 'application/json' 
             })
         };
 
-        fetch('https://instalura-api.herokuapp.com/api/public/login',requestInfo)
+        fetch('https://instalura-api.herokuapp.com/api/public/login', requestInfo)
             .then(response => {
                 if(response.ok) {
                     return response.text();
